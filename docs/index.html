@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W7L2E12Y6D"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-W7L2E12Y6D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>FreeGaussian</title>
+
+    <meta name="description"
+        content="FreeGaussian: Annotation-free Control of Articulated Objects via 3D Gaussian Splats with Flow Derivatives">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <base href="/"> -->
+
+    <!--FACEBOOK-->
+    <meta property="og:image" content="assets/img/freegaussian/social.jpg">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1000">
+    <meta property="og:image:height" content="563">
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://tavish9.github.io/freegaussian/" />
+    <meta property="og:title" content="FreeGaussian" />
+    <meta property="og:description"
+        content="Project page for FreeGaussian: Annotation-free Control of Articulated Objects via 3D Gaussian Splats with Flow Derivatives." />
+
+    <!--TWITTER-->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="FreeGaussian" />
+    <meta name="twitter:description"
+        content="Project page for FreeGaussian: Annotation-free Control of Articulated Objects via 3D Gaussian Splats with Flow Derivatives">
+    <meta name="twitter:image" content="assets/img/freegaussian/social.png" />
+
+
+    <!--     <link rel="apple-touch-icon" href="apple-touch-icon.png"> -->
+    <link rel="icon" href="">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+    <link rel="stylesheet" href="assets/css/freegaussian/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/freegaussian/app.css">
+
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+        </script>
+
+    <link rel="stylesheet" href="assets/css/freegaussian/dics.min.css">
+    <script src="assets/js/freegaussian/dics.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', domReady);
+        function domReady() {
+            for (const e of document.querySelectorAll(".b-dics")) {
+                new Dics({
+                    container: e,
+                    textPosition: "top"
+                });
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container" id="main">
+        <div class="row">
+            <h2 class="col-md-12 text-center">
+                <b>FreeGaussian</b>: Annotation-free Control of Articulated Objects<br />
+                via 3D Gaussian Splats with Flow Derivatives</br>
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="list-inline">
+                    <li>
+                        <a href="https://github.com/Tavish9">
+                            Qizhi Chen*<sup>1,2</sup>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/DelinQu">
+                            Delin Qu*<sup>2,3</sup>
+                        </a>
+                    </li>
+                    <li>
+                        Junli Liu<sup>2</sup>
+                    </li>
+                    <li>
+                        Yiwen Tang<sup>2</sup>
+                    </li>
+                    <li>
+                        Haoming Song<sup>2</sup>
+                    </li>
+                    <li>
+                        Dong Wang<sup>2</sup>
+                    </li>
+                    <li>
+                        Bin Zhao<sup>2</sup>
+                    </li>
+                    <li>
+                        Xuelong Li<sup>2</sup>
+                    </li>
+                </ul>
+                <ul class="list-inline">
+                    <li>
+                        Zhejiang University<sup>1</sup>
+                    </li>
+                    <li>
+                        Shanghai AI Laboratory<sup>2</sup>
+                    </li>
+                    <li>
+                        Fudan University<sup>3</sup>
+                    </li>
+                </ul>
+                <ul class="list-inline">
+                    <li>
+                        equal contribution*
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center">
+                <ul class="nav nav-pills nav-justified row">
+                    <li>
+                        <a href="https://arxiv.org/abs/2410.22070">
+                            <img src="https://uploads-ssl.webflow.com/51e0d73d83d06baa7a00000f/5cab99df4998decfbf9e218e_paper-01.png"
+                                height="65" alt="">
+                            <h4><strong>Paper</strong></h4>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://youtube.com/watch?">
+                            <img src="assets/img/youtube_icon.png" height="65" alt="">
+                            <h4><strong>Video</strong></h4>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#demos">
+                            <img src="assets/img/freegaussian/ball_control.png" height="65" alt="">
+                            <h4><strong>Demos</strong></h4>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/Tavish9/freegaussian">
+                            <img src="assets/img/github_pad.png" height="65" alt="">
+                            <h4><strong>Code</strong></h4>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row top-gutter">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="aspect-ratio-container">
+                    <video class="responsive-video" style="border-radius: 10px;" autobuffer controls>
+                        <source src="assets/video/slide_final.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Abstract
+                </h3>
+                <p class="text-justify">
+                    Reconstructing controllable Gaussian splats for articulated objects from monocular video is
+                    especially challenging due to its inherently insufficient constraints. Existing methods address this
+                    by relying on dense masks and manually defined control signals, limiting their real-world
+                    applications. In this paper, we propose an annotation-free method, \textbf{\ours}, which
+                    mathematically disentangles camera egomotion and articulated movements via flow derivatives. By
+                    establishing a connection between 2D flows and 3D Gaussian dynamic flow, our method enables
+                    optimization and continuity of dynamic Gaussian motions from flow priors without any control
+                    signals. Furthermore, we introduce a 3D spherical vector controlling scheme, which represents the
+                    state as a 3D Gaussian trajectory, thereby eliminating the need for complex 1D control signal
+                    calculations and simplifying controllable Gaussian modeling. Extensive experiments on articulated
+                    objects demonstrate the state-of-the-art visual performance and precise, part-aware controllability
+                    of our method.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="row" id="Pipeline">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Pipeline
+                </h3>
+                <br>
+                <img src="assets/img/freegaussian/pipeline.png" style="width:100%;" class="img-responsive center-block"
+                    alt="Pipeline">
+                <br>
+                <p class="text-justify">
+                    The overview of FreeGaussian. Given a set of video stream \(\{\mathbf{P}(t), \mathbf{I}(t)\}\), our
+                    method recover controllable 3D Gaussians \(\mathbf{G}^{\ast}\) with two stages. First, we pre-train
+                    a deformable 3DGS and calculate dynamic Gaussian flow \(\mathbf{u}^\text{GS}\) from optical and
+                    camera flow with <a href="#Lemma 1">Lemma 1</a>. Then, we reproject dynamic Gaussian flow maps and
+                    cluster the highlight 3DGS with the DBSCAN algorithm, followed with trajectory calculation. In the
+                    controllable Gaussian training stage, we optimize Gaussians \(\mathbf{G}\) and network
+                    \(\mathbf{\Theta}\) using rasterization-based loss function in Sec 3.4, which measures the
+                    discrepancy between rendered images and input images, as well as dynamic Gaussian flows.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Dynamic Gaussian Flow Analysis
+                </h3>
+                <img src="assets/img/freegaussian/dynamic_gs_flow.png" style="width:50%"
+                    class="img-responsive center-block" alt="Dynamic Gaussian Flow Analysis">
+                <p class="text-justify">
+                    In interactive scenes, consider an instantaneous motion
+                    model, where the camera and 3D Gaussian hold separate velocities in consecutive frames. The
+                    projected optical flow \(\mathbf{u}\) can be decomposed into camera flow \(\mathbf{u}^\text{Cam}\)
+                    and dynamic Gaussian flow \(\mathbf{u}^\text{GS}\), as described in <a href="#Lemma 1">Lemma 1</a>
+                    and <a href="#Corollary 1">Corollary 1</a>.
+                </p>
+                </p>
+            </div>
+        </div>
+
+
+        <div class="row" id="Lemma 1">
+            <div class="col-md-8 col-md-offset-2">
+                <h4 style="font-weight: bold;">
+                    Lemma 1
+                </h4>
+                <p class="text-justify" style="font-style: italic;">
+                    Dynamic Gaussian flow \(\mathbf{u}^\text{GS}\) under instantaneous motion can be derived from
+                    optical flow \(\mathbf{u}\) and camera flow \(\mathbf{u}^\text{Cam}\) with the following
+                    transform:
+                    \[
+                    \begin{equation}
+                    \begin{aligned}
+                    \label{eq:gaussian_flow_analysis}
+                    & \mathbf{u} = \mathbf{u}^\text{Cam} + \mathbf{u}^\text{GS} + \mathbf{\Delta}, \\
+                    & \mathbf{u}^\text{Cam} = \frac{\mathbf{A}\boldsymbol{v}}{Z} + \mathbf{B}\boldsymbol{\omega}, \quad
+                    \mathbf{u}^\text{GS} = \mathbf{A} \sum_{i=1}^{M} T_i \alpha_i \frac{\boldsymbol{v}^\text{GS}}{Z_i},
+                    \quad \mathbf{\Delta} = \mathbf{A} \sum_{i=1}^{M} T_i \alpha_i \boldsymbol{v}(\frac{1}{Z_i} -
+                    \frac{1}{Z}), \\
+                    & \mathbf{A} = \begin{bmatrix}
+                    -f_x & 0 & x - c_x \\
+                    0 & -f_y & y - c_y
+                    \end{bmatrix}, \quad \mathbf{B} = \begin{bmatrix}
+                    \frac{(x - c_x)(y - c_y)}{f_y} & - f_x - \frac{(x - c_x)^2}{f_x} & \frac{(y - c_y) f_x}{f_y} \\
+                    f_y + \frac{(y - c_y)^2}{f_y} & -\frac{(x - c_x)(y - c_y)}{f_x} & -\frac{(x - c_x)f_y}{f_x}
+                    \end{bmatrix}, \\
+                    \end{aligned}
+                    \end{equation}
+                    \]
+                </p>
+                <p class="text-justify">
+                    where \(f_x, f_y, c_x, c_y\) are camera intrinsics, \(M\) denotes the number of Gaussian projections
+                    sorted with Gaussian depth \(Z_i\) intersecting the pixel \(\mathbf{m}\). Flow residual term
+                    \(\mathbf{\Delta}\) are preserved to guarantee accuracy, even when they approach zero after refined
+                    optimization.
+                </p>
+            </div>
+        </div>
+
+        <div class="row" id="Corollary 1">
+            <div class="col-md-8 col-md-offset-2">
+                <h4 style="font-weight: bold;">
+                    Corollary 1
+                </h4>
+                <p class="text-justify" style="font-style: italic;">
+                    The dynamic Gaussian flow \(\mathbf{\tilde{u}}^\text{GS}\) on image plane can be accumulated
+                    with 2D Gaussian means displacement \(\boldsymbol{\mu}_{i,t} - \boldsymbol{\mu}_{i,0}\).
+                    \[
+                    \begin{align}
+                    \mathbf{u} = \mathbf{u}^\text{Cam} + \tilde{\mathbf{u}}^\text{GS} + \mathbf{\Delta}, \quad
+                    \tilde{\mathbf{u}}^\text{GS} = \sum_{i=1}^{M} T_i \alpha_i (\boldsymbol{\mu}_{i,t} -
+                    \boldsymbol{\mu}_{i,0}).
+                    \label{eq:dynamic_gs_flow}
+                    \end{align}
+                    \]
+                </p>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Dynamic Gaussian clustering and tracking
+                </h3>
+                <img src="assets/img/freegaussian/clustering_and_tracking.png" style="width:50%"
+                    class="img-responsive center-block" alt="Dynamic Gaussian clustering and tracking">
+                <p class="text-justify">
+                    With the formulations in <a href="#Corollary 1">Corollary 1</a>, we pretrain a deformable 3DGS
+                    \(\mathbf{G}^{\prime}\) with a set of camera streams first. Then dynamic Gaussian flow
+                    \(\mathbf{u}^\text{GS}\) from <a href="#Corollary 1">Corollary 1</a> can be extracted frame-by-frame
+                    and binaried to obtain flow maps. By back-projecting the flow maps to identify dynamic 3D Gaussians,
+                    we highlight Gaussians \(\mathcal{D} = \{g_i \mid i = 1, 2, \ldots, Q\}\) with sharp dynamics, as
+                    illustrated in <a href="#Pipeline">Pipeline</a>. Next, we use unsupervised clustering algorithm
+                    DBSCAN to group dynamic Gaussians into clusters \(\mathcal{C} = \{c_i \mid i = 1, 2, \ldots, K\}\),
+                    where \(K\) is the number of interactive objects. The cluster centers evolve over time, generating
+                    continuous trajectories \(\boldsymbol{\varsigma}(t, k)\), where \(k\) indexing which objects the
+                    trajectory belongs to.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    3D Spherical Vector Control
+                </h3>
+                <img src="assets/img/freegaussian/3d_vector_control.png" style="width:50%"
+                    class="img-responsive center-block" alt="3D Spherical Vector Control">
+                <p class="text-justify">
+                    In the training stage, we represent the Gaussian dynamics state using cluster trajectory coordinates
+                    \(\mathbf{v}_c^i = \boldsymbol{\varsigma}(t, k) - \boldsymbol{\varsigma}(0, k)\), concatenated with
+                    Gaussian centers \(\mathbf{X}_i\). Then, we encode the coordinates with
+                    \(\mathbf{E}(\mathbf{v}_{c}^i,
+                    \mathbf{X}_i)\) and jointly train the model \(\Theta\) to recover Gaussian dynamics \(\left \langle
+                    \Delta\mathbf{X}_i, \Delta\mathbf{\Sigma}_i \right \rangle\):
+                    \[
+                    \begin{align}
+                    \boldsymbol{f}_{\Theta}\left(\mathbf{X}_i, \mathbf{E}(\boldsymbol{\varsigma}(t, k) -
+                    \boldsymbol{\varsigma}(0, k)) \right) \mapsto \left \langle \Delta\mathbf{X}_i,
+                    \Delta\mathbf{\Sigma}_i \right \rangle.
+                    \label{eq:training}
+                    \end{align}
+                    \]
+                    Then, we perform splatting rasterization with the Gaussian combining with
+                    predicted dynamics. In contrast, during the control stage, we manually input interactive 3D vector
+                    \(\mathbf{v}_c^\prime\), retrieving the Gaussian dynamics from the network by \(
+                    \boldsymbol{f}_{\Theta}\left(\mathbf{X}_i, \mathbf{v}_c^\prime \right)\).
+
+                </p>
+                </p>
+            </div>
+        </div>
+
+        <div class="row" id="demos">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    More Demos
+                </h3>
+                <div class="aspect-ratio-container">
+                    <video class="responsive-video" style="border-radius: 10px;" autobuffer controls autoplay loop
+                        muted>
+                        <source src="assets/video/demo003.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Citation
+                </h3>
+                <p>
+                    If you want to cite our work, please use:
+                </p>
+                <pre>
+@misc{chen2025freegaussianannotationfreecontrollable3d,
+    title={FreeGaussian: Annotation-free Control of Articulated Objects via 3D Gaussian Splats with Flow Derivatives}, 
+    author={Qizhi Chen and Delin Qu and Junli Liu and Yiwen Tang and Haoming Song and Dong Wang and Bin Zhao and Xuelong Li},
+    year={2025},
+    eprint={2410.22070},
+    archivePrefix={arXiv},
+    primaryClass={cs.CV},
+    url={https://arxiv.org/abs/2410.22070}, 
+}
+                </pre>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Acknowledgements
+                </h3>
+                <p class="text-justify">
+                    The website template was borrowed from <a href="http://mgharbi.com/">Michaël
+                        Gharbi</a>. Image sliders are based on <a
+                        href="https://github.com/abelcabezaroman/definitive-image-comparison-slider">dics</a>.
+                    We adopt code from <a href="https:/docs.nerf.studio/">Nerfstudio</a>. Thanks for making the code
+                    available!
+                </p>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
