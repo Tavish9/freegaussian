@@ -1,0 +1,6 @@
+from freegaussian.datamanager.freegaussian_dataparser import FreeGaussianCoNeRFDataParserConfig, FreeGaussianRealDataParserConfig, FreeGaussianSyntheticDataParserConfig
+from nerfstudio.plugins.registry_dataparser import DataParserSpecification
+
+freegaussian_conerf_data = DataParserSpecification(config=FreeGaussianCoNeRFDataParserConfig())
+freegaussian_real_data = DataParserSpecification(config=FreeGaussianRealDataParserConfig())
+freegaussian_sim_data = DataParserSpecification(config=FreeGaussianSyntheticDataParserConfig())

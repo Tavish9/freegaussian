@@ -1,0 +1,58 @@
+max_num_iterations: 30001
+spatial_lr_scale: 2
+
+optimizers:
+  means:
+    optimizer:
+      lr: "${eval: 1.6e-4 * ${spatial_lr_scale}}"
+    scheduler:
+      lr_final: "${eval: 1.6e-6 * ${spatial_lr_scale}}"
+      max_steps: "${eval: ${max_num_iterations} - 1}"
+  features_dc:
+    optimizer:
+      lr: 0.0025
+  features_rest:
+    optimizer:
+      lr: "${eval: 0.0025 / 20}"
+  opacities:
+    optimizer:
+      lr: 0.05
+  scales:
+    optimizer:
+      lr: 0.001
+  quats:
+    optimizer:
+      lr: 0.001
+  deform:
+    optimizer:
+      lr: "${eval: 1.6e-4 * ${spatial_lr_scale}}"
+    scheduler:
+      warmup_steps: 3000
+      lr_final: "${eval: 1.6e-5 * ${spatial_lr_scale}}"
+      max_steps: "${eval: ${max_num_iterations} - 1}"
+  control:
+    optimizer:
+      lr: "${eval: 1.6e-4 * ${spatial_lr_scale}}"
+    scheduler:
+      lr_final: "${eval: 1.6e-5 * ${spatial_lr_scale}}"
+      max_steps: "${eval: ${max_num_iterations} - 1}"
+
+pipeline:
+  model:
+    warm_up: 3000
+    cull_alpha_thresh: 0.07
+    cull_scale_thresh: 0.08
+    densify_grad_thresh: 0.0015
+    densify_size_thresh: 0.01
+    cull_screen_size: 0.15
+    split_screen_size: 0.05
+    stop_screen_size_at: 4000
+    random_init: False
+    num_random: 5000
+    random_scale: 6.0
+    stop_split_at: "${eval: ${max_num_iterations} - 5000}"
+    translation: [0, 0.5, -0.5]
+
+vis: tensorboard
+viewer:
+  websocket-port: 7007
